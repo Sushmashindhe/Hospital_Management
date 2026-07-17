@@ -1,0 +1,49 @@
+body {
+  background: #f5f9ff;
+}
+
+.page-title {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.page-subtitle {
+  color: #666;
+  font-size: 18px;
+}
+
+.department-card {
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+  text-align: center;
+  transition: .35s;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+  height: 100%;
+}
+
+  .department-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,.18);
+  }
+
+.icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.department-card h4 {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.doctor-count {
+  margin-top: 15px;
+  color: #555;
+  font-size: 17px;
+}
+
+.btn {
+  border-radius: 30px;
+  padding: 10px 25px;
+}

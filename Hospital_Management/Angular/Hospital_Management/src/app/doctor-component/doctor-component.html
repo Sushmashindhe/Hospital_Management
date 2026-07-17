@@ -1,0 +1,267 @@
+<div class="container py-4">
+
+  <!-- Toast Message -->
+  <div *ngIf="showMessage"
+       class="position-fixed top-0 end-0 p-3"
+       style="z-index:2000">
+
+    <div class="alert shadow"
+         [ngClass]="{
+                'alert-success':messageType=='success',
+                'alert-danger':messageType=='danger',
+                'alert-warning':messageType=='warning'
+             }">
+
+      {{message}}
+
+    </div>
+
+  </div>
+
+  <!-- Welcome Card -->
+
+  <div class="welcome-card d-flex justify-content-between align-items-center mb-5">
+
+    <div>
+
+      <h2>Welcome {{doctor.doctorName}}</h2>
+
+      <p>{{doctor.doctorEmail}}</p>
+
+    </div>
+
+    <button class="btn btn-danger"
+            (click)="logout()">
+
+      Logout
+
+    </button>
+
+  </div>
+
+  <h3 class="mb-4">
+
+    My Appointments
+
+  </h3>
+
+  <div class="row">
+
+    <div class="col-lg-6 mb-4"
+         *ngFor="let app of appointments">
+
+      <div class="doctor-card">
+
+        <div class="card-body">
+
+          <!-- Patient Icon -->
+
+          <div class="text-center mb-4">
+
+            <div class="doctor-icon mx-auto d-flex justify-content-center align-items-center">
+
+              <i class="fas fa-user-injured fa-2x"></i>
+
+            </div>
+
+            <h4 class="mt-3">
+
+              {{app.patient.patientName}}
+
+            </h4>
+
+          </div>
+
+          <hr>
+
+          <!-- Patient Details -->
+
+          <p>
+
+            <strong>Email :</strong>
+
+            {{app.patient.patientEmail}}
+
+          </p>
+
+          <p>
+
+            <strong>Phone :</strong>
+
+            {{app.patient.phoneNumber}}
+
+          </p>
+
+          <p>
+
+            <strong>Age :</strong>
+
+            {{app.patient.age}}
+
+          </p>
+
+          <p>
+
+            <strong>Gender :</strong>
+
+            {{app.patient.gender}}
+
+          </p>
+
+          <p>
+
+            <strong>Blood Group :</strong>
+
+            {{app.patient.bloodGroup}}
+
+          </p>
+
+          <hr>
+
+          <!-- Appointment Details -->
+
+          <p>
+
+            <strong>Appointment :</strong>
+
+            {{app.appointmentDate | date:'medium'}}
+
+          </p>
+
+          <p>
+
+            <strong>Reason :</strong>
+
+            {{app.reason}}
+
+          </p>
+
+          <p>
+
+            <strong>Status :</strong>
+
+            <span class="status-available"
+                  *ngIf="app.status=='Completed'">
+
+              Completed
+
+            </span>
+
+            <span class="status-scheduled"
+                  *ngIf="app.status=='Scheduled'">
+
+              Scheduled
+
+            </span>
+
+            <span class="status-busy"
+                  *ngIf="app.status=='Cancelled'">
+
+              Cancelled
+
+            </span>
+
+          </p>
+
+          <p>
+
+            <strong>Feedback :</strong>
+
+            {{app.feedBack || 'Not Added'}}
+
+          </p>
+
+          <!-- Buttons -->
+
+          <button class="btn btn-primary w-100"
+                  *ngIf="app.status=='Scheduled'"
+                  (click)="openFeedback(app)">
+
+            Add Feedback
+
+          </button>
+
+          <button class="btn btn-secondary w-100"
+                  *ngIf="app.status=='Completed'"
+                  disabled>
+
+            Feedback Submitted
+
+          </button>
+
+          <button class="btn btn-danger w-100"
+                  *ngIf="app.status=='Cancelled'"
+                  disabled>
+
+            Appointment Cancelled
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ==========================
+     Feedback Modal
+========================== -->
+
+<div class="modal-backdrop-custom"
+     *ngIf="selectedAppointment">
+
+  <div class="booking-card">
+
+    <h3 class="text-center mb-2">
+
+      Add Feedback
+
+    </h3>
+
+    <h5 class="text-center">
+
+      {{selectedAppointment.patient.patientName}}
+
+    </h5>
+
+    <div class="mb-3">
+
+      <label class="form-label">
+
+        Feedback
+
+      </label>
+
+      <textarea class="form-control"
+                rows="5"
+                [(ngModel)]="feedback">
+
+            </textarea>
+
+    </div>
+
+    <div class="d-flex justify-content-end gap-2">
+
+      <button class="btn btn-success"
+              (click)="submitFeedback()">
+
+        Save
+
+      </button>
+
+      <button class="btn btn-danger"
+              (click)="closeDialog()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

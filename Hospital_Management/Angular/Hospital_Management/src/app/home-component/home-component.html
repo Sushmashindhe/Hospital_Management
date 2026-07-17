@@ -1,0 +1,450 @@
+<app-header></app-header>
+<div id="home" class="home-container">
+
+  <!-- ================= POPUP ================= -->
+
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+
+    <div *ngIf="showPopup"
+         class="custom-popup"
+         [class.success]="popupSuccess"
+         [class.error]="!popupSuccess">
+
+      {{popupMessage}}
+
+    </div>
+
+  </div>
+
+  <!-- ================= LEFT SIDE ================= -->
+
+  <div class="left-panel">
+
+    <div class="overlay">
+
+      <div class="logo">
+
+        🏥
+
+      </div>
+
+      <h1>
+
+        Hospital Management System
+
+      </h1>
+
+      <p>
+
+        Smart Healthcare Management Solution
+
+      </p>
+
+
+
+
+      <div class="features">
+
+        <div class="feature">
+
+          ✔ Easy Appointment Booking
+
+        </div>
+
+        <div class="feature">
+
+          ✔ Secure Patient Records
+
+        </div>
+
+        <div class="feature">
+
+          ✔ Doctor Dashboard
+
+        </div>
+
+        <div class="feature">
+
+          ✔ Admin Management
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= RIGHT SIDE ================= -->
+
+  <div class="right-panel">
+
+    <!-- ================= LOGIN ================= -->
+
+    <div class="login-card"
+         *ngIf="!showPatientRegister">
+
+      <h2>
+
+        Welcome Back
+
+      </h2>
+
+      <p class="text-muted mb-4">
+
+        Login to continue
+
+      </p>
+
+      <!-- Login As -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Login As
+
+        </label>
+
+        <select class="form-select"
+                [(ngModel)]="selectedRole">
+
+          <option value="">Select User</option>
+
+          <option value="Admin">
+            Admin
+          </option>
+
+          <option value="Doctor">
+            Doctor
+          </option>
+
+          <option value="Patient">
+            Patient
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- Email -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Email
+
+        </label>
+
+        <input type="email"
+               class="form-control"
+               placeholder="Enter Email"
+               [(ngModel)]="loginEmail">
+
+      </div>
+
+      <!-- Password -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Password
+
+        </label>
+
+        <input [type]="showPassword ? 'text' : 'password'"
+               class="form-control"
+               placeholder="Enter Password"
+               [(ngModel)]="loginPassword">
+
+      </div>
+
+      <!-- Show Password -->
+
+      <div class="form-check mb-4">
+
+        <input class="form-check-input"
+               type="checkbox"
+               [(ngModel)]="showPassword"
+               id="showPassword">
+
+        <label class="form-check-label"
+               for="showPassword">
+
+          Show Password
+
+        </label>
+
+      </div>
+
+      <!-- Login -->
+
+      <button class="btn btn-primary w-100"
+              (click)="login()">
+
+        Login
+
+      </button>
+
+      <hr>
+
+      <div class="text-center">
+
+        <span>
+
+          New Patient?
+
+        </span>
+
+        <a class="register-link"
+           (click)="showRegister()">
+
+          Register Here
+
+        </a>
+
+      </div>
+
+    </div>
+    <!-- ================= REGISTER ================= -->
+
+    <div class="login-card"
+         *ngIf="showPatientRegister">
+
+      <h2>
+
+        Patient Registration
+
+      </h2>
+
+      <p class="text-muted mb-4">
+
+        Create your account
+
+      </p>
+
+      <!-- Patient Name -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Patient Name
+
+        </label>
+
+        <input type="text"
+               class="form-control"
+               placeholder="Enter Full Name"
+               [(ngModel)]="patient.patientName">
+
+      </div>
+
+      <!-- Phone -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Phone Number
+
+        </label>
+
+        <input type="text"
+               class="form-control"
+               maxlength="10"
+               placeholder="Enter Phone Number"
+               [(ngModel)]="patient.phoneNumber">
+
+      </div>
+
+      <!-- Email -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Email
+
+        </label>
+
+        <input type="email"
+               class="form-control"
+               placeholder="Enter Email"
+               [(ngModel)]="patient.patientEmail">
+
+      </div>
+
+      <!-- Password -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Password
+
+        </label>
+
+        <input [type]="showPassword ? 'text' : 'password'"
+               class="form-control"
+               placeholder="Enter Password"
+               [(ngModel)]="patient.password">
+
+      </div>
+
+      <!-- Confirm Password -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Confirm Password
+
+        </label>
+
+        <input [type]="showPassword ? 'text' : 'password'"
+               class="form-control"
+               placeholder="Confirm Password"
+               [(ngModel)]="confirmPassword">
+
+      </div>
+
+      <!-- Show Password -->
+
+      <div class="form-check mb-3">
+
+        <input class="form-check-input"
+               type="checkbox"
+               id="showRegisterPassword"
+               [(ngModel)]="showPassword">
+
+        <label class="form-check-label"
+               for="showRegisterPassword">
+
+          Show Password
+
+        </label>
+
+      </div>
+
+      <!-- Age -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Age
+
+        </label>
+
+        <input type="number"
+               class="form-control"
+               placeholder="Enter Age"
+               [(ngModel)]="patient.age">
+
+      </div>
+
+      <!-- Gender -->
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Gender
+
+        </label>
+
+        <select class="form-select"
+                [(ngModel)]="patient.gender">
+
+          <option [ngValue]="null">
+
+            Select Gender
+
+          </option>
+
+          <option [ngValue]="1">
+
+            Male
+
+          </option>
+
+          <option [ngValue]="2">
+
+            Female
+
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- Blood Group -->
+
+      <div class="mb-4">
+
+        <label class="form-label">
+
+          Blood Group
+
+        </label>
+
+        <select class="form-select"
+                [(ngModel)]="patient.bloodGroup">
+
+          <option [ngValue]="null">
+
+            Select Blood Group
+
+          </option>
+
+          <option [ngValue]="1">A+</option>
+          <option [ngValue]="2">A-</option>
+          <option [ngValue]="3">B+</option>
+          <option [ngValue]="4">B-</option>
+          <option [ngValue]="5">AB+</option>
+          <option [ngValue]="6">AB-</option>
+          <option [ngValue]="7">O+</option>
+          <option [ngValue]="8">O-</option>
+
+        </select>
+
+      </div>
+
+      <!-- Register Button -->
+
+      <button class="btn btn-success w-100"
+              (click)="registerPatient()">
+
+        Register
+
+      </button>
+
+      <hr>
+
+      <div class="text-center">
+
+        Already have an account?
+
+        <a class="register-link"
+           (click)="showLogin()">
+
+          Login
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="footer">
+
+  © 2025 Hospital Management System | All Rights Reserved
+
+</footer>

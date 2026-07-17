@@ -1,0 +1,46 @@
+<app-header></app-header>
+
+<div class="container py-5">
+
+  <h1 class="page-title text-center">
+    Our Medical Departments
+  </h1>
+
+  <p class="page-subtitle text-center">
+    We provide comprehensive healthcare services with experienced specialists.
+  </p>
+
+  <div class="row mt-5">
+
+    <div class="col-lg-4 col-md-6 mb-4"
+         *ngFor="let d of departments">
+
+      <div class="department-card">
+
+        <div class="icon">
+          🏥
+        </div>
+
+        <h4>
+          {{d.departmentName}}
+        </h4>
+
+        <div class="doctor-count">
+
+          👨‍⚕️ {{d.numberOfDoctors}} Doctors Available
+
+        </div>
+
+        <button class="btn btn-primary mt-3">
+
+          View Specialists
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

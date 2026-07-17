@@ -1,0 +1,248 @@
+/* =======================================
+   ADMIN LAYOUT
+======================================= */
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #eef5ff;
+}
+
+/* Sidebar */
+
+.sidebar {
+  width: 260px;
+  background: #1e40af;
+  color: white;
+  padding: 25px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  box-shadow: 5px 0 20px rgba(0,0,0,.15);
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+  .logo h3 {
+    margin-top: 15px;
+    font-weight: 700;
+  }
+
+.logo {
+  font-size: 40px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 15px 18px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: .3s;
+  font-size: 17px;
+}
+
+  .sidebar li:hover {
+    background: rgba(255,255,255,.15);
+  }
+
+  .sidebar li.active {
+    background: white;
+    color: #1e40af;
+    font-weight: 600;
+  }
+
+/* Main Content */
+
+.main-content {
+  margin-left: 260px;
+  width: calc(100% - 260px);
+  padding: 35px;
+}
+
+/* Topbar */
+
+.topbar {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+  margin-bottom: 30px;
+}
+
+  .topbar h2 {
+    color: #2563eb;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .topbar p {
+    margin: 0;
+    color: #666;
+  }
+
+/* Cards */
+
+.stats-card {
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+  transition: .3s;
+}
+
+  .stats-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .stats-card span {
+    font-size: 45px;
+  }
+
+  .stats-card h2 {
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+.blue {
+  border-left: 6px solid #2563eb;
+}
+
+.green {
+  border-left: 6px solid #16a34a;
+}
+
+.orange {
+  border-left: 6px solid #f59e0b;
+}
+
+.red {
+  border-left: 6px solid #dc2626;
+}
+/* ===========================
+   Page Title
+=========================== */
+
+.page-title {
+  color: #2563EB;
+  font-weight: 700;
+  font-size: 34px;
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.content-card {
+  margin-top: 30px;
+}
+
+.card {
+  border-radius: 20px;
+}
+
+/* ===========================
+   Table
+=========================== */
+
+.table thead {
+  background: #2563EB;
+  color: white;
+}
+
+  .table thead th {
+    padding: 18px;
+    border: none;
+  }
+
+.table tbody td {
+  padding: 16px;
+  vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+  background: #EEF6FF;
+}
+
+/* ===========================
+   Action Buttons
+=========================== */
+
+.action-btn {
+  min-width: 90px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ===========================
+   Add Button
+=========================== */
+
+.add-btn {
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+}
+/* ======================================
+   Doctor Form
+====================================== */
+
+.form-label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-control,
+.form-select {
+  height: 48px;
+  border-radius: 10px;
+}
+
+  .form-control:focus,
+  .form-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 8px rgba(37,99,235,.2);
+  }
+
+/* ======================================
+   Availability Badge
+====================================== */
+
+.badge {
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* ======================================
+   Doctor Table
+====================================== */
+
+.table td {
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  transition: .3s;
+}
+
+  .table tbody tr:hover {
+    transform: scale(1.01);
+  }
+
+

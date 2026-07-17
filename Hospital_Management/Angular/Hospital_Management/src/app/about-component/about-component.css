@@ -1,0 +1,51 @@
+.hero {
+  background: #eef6ff;
+  padding: 70px 0;
+}
+
+  .hero h1 {
+    font-size: 55px;
+    font-weight: 700;
+    color: #2563eb;
+  }
+
+  .hero p {
+    font-size: 20px;
+    color: #555;
+    margin-top: 20px;
+  }
+
+.feature-card {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  transition: .3s;
+  height: 100%;
+}
+
+  .feature-card:hover {
+    transform: translateY(-8px);
+  }
+
+.feature-card {
+  font-size: 18px;
+}
+
+  .feature-card h4 {
+    margin-top: 20px;
+    font-weight: 700;
+  }
+
+.stats {
+  margin-top: 60px;
+  background: #2563eb;
+  padding: 60px;
+  color: white;
+}
+
+  .stats h2 {
+    font-size: 45px;
+    font-weight: 700;
+  }

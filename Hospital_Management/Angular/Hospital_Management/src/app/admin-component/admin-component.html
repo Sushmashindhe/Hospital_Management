@@ -1,0 +1,670 @@
+<div class="admin-layout">
+
+  <!-- ================= Sidebar ================= -->
+
+  <div class="sidebar">
+
+    <div class="logo">
+
+      🏥
+
+      <h3>Hospital HMS</h3>
+
+    </div>
+
+    <ul>
+
+      <li (click)="showDashboard()"
+          [class.active]="currentView=='dashboard'">
+
+        📊 Dashboard
+
+      </li>
+
+      <li (click)="showDepartments()"
+          [class.active]="currentView=='departments'">
+
+        🏢 Departments
+
+      </li>
+
+      <li (click)="showDoctors()"
+          [class.active]="currentView=='doctors'">
+
+        👨‍⚕️ Doctors
+
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- ================= Main Content ================= -->
+
+  <div class="main-content">
+
+    <!-- Header -->
+
+    <div class="topbar">
+
+      <div>
+
+        <h2>
+
+          Administrator Dashboard
+
+        </h2>
+
+        <p>
+
+          Welcome Admin 👋
+
+        </p>
+
+      </div>
+
+      <button class="btn btn-danger"
+              (click)="logout()">
+
+        Logout
+
+      </button>
+    </div>
+
+    <!-- ================= Dashboard ================= -->
+
+    <div *ngIf="currentView=='dashboard'">
+
+      <div class="row g-4">
+
+        <div class="col-lg-3 col-md-6">
+
+          <div class="stats-card blue">
+
+            <div>
+
+              <h5>Departments</h5>
+
+              <h2>{{departmentCount}}</h2>
+
+            </div>
+
+            <span>🏢</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+          <div class="stats-card green">
+
+            <div>
+
+              <h5>Doctors</h5>
+
+              <h2>{{doctorCount}}</h2>
+
+            </div>
+
+            <span>👨‍⚕️</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+          <div class="stats-card orange">
+
+            <div>
+
+              <h5>Patients</h5>
+
+              <h2>{{patientCount}}</h2>
+
+            </div>
+
+            <span>🧑</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+          <div class="stats-card red">
+
+            <div>
+
+              <h5>Appointments</h5>
+
+              <h2>{{appointmentCount}}</h2>
+
+            </div>
+
+            <span>📅</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- ==========================================
+       DEPARTMENT MANAGEMENT
+  ========================================== -->
+
+    <div *ngIf="currentView=='departments'" class="content-card mt-4">
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+          <h3 class="page-title">
+            🏢 Department Management
+          </h3>
+
+          <p class="text-muted">
+            Add, Update and Manage Hospital Departments
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Add Department -->
+
+      <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-lg-9">
+
+              <label class="form-label">
+
+                Department Name
+
+              </label>
+
+              <input class="form-control"
+                     placeholder="Enter Department Name"
+                     [(ngModel)]="department.departmentName">
+
+            </div>
+
+            <div class="col-lg-3 d-flex align-items-end">
+
+              <button class="btn btn-primary w-100 add-btn"
+                      (click)="addDepartment()">
+
+                <i class="bi bi-plus-circle me-2"></i>
+
+                Add Department
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Department Table -->
+
+      <div class="card shadow-sm border-0 rounded-4">
+
+        <div class="card-body">
+
+          <div class="table-responsive">
+
+            <table class="table align-middle table-hover">
+
+              <thead>
+
+                <tr>
+
+                  <th>ID</th>
+
+                  <th>Department</th>
+
+                  <th>No. Doctors</th>
+
+                  <th width="220">
+
+                    Action
+
+                  </th>
+
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let d of departments">
+
+                  <td>
+
+                    {{d.departmentId}}
+
+                  </td>
+
+                  <td>
+
+                    <span *ngIf="editDepartmentId!=d.departmentId">
+
+                      {{d.departmentName}}
+
+                    </span>
+
+                    <input *ngIf="editDepartmentId==d.departmentId"
+                           class="form-control"
+                           [(ngModel)]="d.departmentName">
+
+                  </td>
+
+                  <td>
+
+                    {{d.numberOfDoctors}}
+
+                  </td>
+
+                  <td>
+
+                    <button *ngIf="editDepartmentId!=d.departmentId"
+                            class="btn btn-warning btn-sm me-2 action-btn"
+                            (click)="editDepartment(d)">
+
+                      ✏ Edit
+
+                    </button>
+
+                    <button *ngIf="editDepartmentId==d.departmentId"
+                            class="btn btn-success btn-sm me-2 action-btn"
+                            (click)="updateDepartment(d)">
+
+                      💾 Save
+
+                    </button>
+
+                    <button class="btn btn-danger btn-sm action-btn"
+                            (click)="deleteDepartment(d.departmentId)">
+
+                      🗑 Delete
+
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- ==========================================
+       DOCTOR MANAGEMENT
+  ========================================== -->
+
+    <div *ngIf="currentView=='doctors'" class="content-card mt-4">
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+          <h3 class="page-title">
+
+            👨‍⚕️ Doctor Management
+
+          </h3>
+
+          <p class="text-muted">
+
+            Add, Update and Manage Doctors
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Add Doctor -->
+
+      <div class="card shadow-sm border-0 rounded-4 mb-4">
+
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-lg-6 mb-3">
+
+              <label class="form-label">
+
+                Doctor Name
+
+              </label>
+
+              <input class="form-control"
+                     placeholder="Enter Doctor Name"
+                     [(ngModel)]="doctor.doctorName">
+
+            </div>
+
+            <div class="col-lg-6 mb-3">
+
+              <label class="form-label">
+
+                Phone Number
+
+              </label>
+
+              <input class="form-control"
+                     maxlength="10"
+                     placeholder="Enter Phone Number"
+                     [(ngModel)]="doctor.phoneNumber">
+
+            </div>
+
+            <div class="col-lg-6 mb-3">
+
+              <label class="form-label">
+
+                Email Address
+
+              </label>
+
+              <input class="form-control"
+                     placeholder="Enter Email"
+                     [(ngModel)]="doctor.doctorEmail">
+
+            </div>
+
+            <div class="col-lg-6 mb-3">
+
+              <label class="form-label">
+
+                Password
+
+              </label>
+
+              <input type="password"
+                     class="form-control"
+                     placeholder="Enter Password"
+                     [(ngModel)]="doctor.password">
+
+            </div>
+
+            <div class="col-lg-6 mb-3">
+
+              <label class="form-label">
+
+                Department
+
+              </label>
+
+              <select class="form-select"
+                      [(ngModel)]="doctor.departmentId">
+
+                <option [ngValue]="0">
+
+                  Select Department
+
+                </option>
+
+                <option *ngFor="let dep of departments"
+                        [ngValue]="dep.departmentId">
+
+                  {{dep.departmentName}}
+
+                </option>
+
+              </select>
+
+            </div>
+
+            <div class="col-lg-6 mb-3">
+
+              <label class="form-label">
+
+                Availability
+
+              </label>
+
+              <select class="form-select"
+                      [(ngModel)]="doctor.availability">
+
+                <option [ngValue]="null">
+
+                  Select Availability
+
+                </option>
+
+                <option [ngValue]="1">
+
+                  Available
+
+                </option>
+
+                <option [ngValue]="2">
+
+                  Not Available
+
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+          <div class="text-end">
+
+            <button class="btn btn-success add-btn"
+                    (click)="addDoctor()">
+
+              ➕ Add Doctor
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Doctor Table -->
+
+      <div class="card shadow-sm border-0 rounded-4">
+
+        <div class="card-body">
+
+          <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+              <thead>
+
+                <tr>
+
+                  <th>ID</th>
+
+                  <th>Name</th>
+
+                  <th>Department</th>
+
+                  <th>Phone</th>
+
+                  <th>Email</th>
+
+                  <th>Status</th>
+
+                  <th width="220">
+
+                    Action
+
+                  </th>
+
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let d of doctors">
+
+                  <td>{{d.doctorId}}</td>
+
+                  <td>
+
+                    <span *ngIf="editDoctorId!=d.doctorId">
+
+                      {{d.doctorName}}
+
+                    </span>
+
+                    <input *ngIf="editDoctorId==d.doctorId"
+                           class="form-control"
+                           [(ngModel)]="d.doctorName">
+
+                  </td>
+
+                  <td>
+
+                    <span *ngIf="editDoctorId!=d.doctorId">
+
+                      {{d.department?.departmentName}}
+
+                    </span>
+
+                    <select *ngIf="editDoctorId==d.doctorId"
+                            class="form-select"
+                            [(ngModel)]="d.departmentId">
+
+                      <option *ngFor="let dep of departments"
+                              [ngValue]="dep.departmentId">
+
+                        {{dep.departmentName}}
+
+                      </option>
+
+                    </select>
+
+                  </td>
+
+                  <td>
+
+                    <span *ngIf="editDoctorId!=d.doctorId">
+
+                      {{d.phoneNumber}}
+
+                    </span>
+
+                    <input *ngIf="editDoctorId==d.doctorId"
+                           class="form-control"
+                           [(ngModel)]="d.phoneNumber">
+
+                  </td>
+
+                  <td>
+
+                    <span *ngIf="editDoctorId!=d.doctorId">
+
+                      {{d.doctorEmail}}
+
+                    </span>
+
+                    <input *ngIf="editDoctorId==d.doctorId"
+                           class="form-control"
+                           [(ngModel)]="d.doctorEmail">
+
+                  </td>
+
+                  <td>
+
+                    <span class="badge bg-success"
+                          *ngIf="d.availability=='Available'">
+
+                      Available
+
+                    </span>
+
+                    <span class="badge bg-danger"
+                          *ngIf="d.availability=='NotAvailable'">
+
+                      Not Available
+
+                    </span>
+
+                    <select *ngIf="editDoctorId==d.doctorId"
+                            class="form-select"
+                            [(ngModel)]="d.availability">
+
+                      <option [ngValue]="1">
+
+                        Available
+
+                      </option>
+
+                      <option [ngValue]="2">
+
+                        Not Available
+
+                      </option>
+
+                    </select>
+
+                  </td>
+
+                  <td>
+
+                    <button *ngIf="editDoctorId!=d.doctorId"
+                            class="btn btn-warning action-btn me-2"
+                            (click)="editDoctor(d)">
+
+                      ✏ Edit
+
+                    </button>
+
+                    <button *ngIf="editDoctorId==d.doctorId"
+                            class="btn btn-success action-btn me-2"
+                            (click)="updateDoctor(d)">
+
+                      💾 Save
+
+                    </button>
+
+                    <button class="btn btn-danger action-btn"
+                            (click)="deleteDoctor(d.doctorId)">
+
+                      🗑 Delete
+
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
