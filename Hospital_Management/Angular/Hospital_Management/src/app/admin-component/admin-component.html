@@ -668,3 +668,22 @@
       </div>
 
     </div>
+    <!-- Toast Popup -->
+
+    <div *ngIf="showMessage"
+         class="custom-toast"
+         [ngClass]="messageType">
+
+      <div class="toast-content">
+
+        <span *ngIf="messageType=='success'">✔</span>
+
+        <span *ngIf="messageType=='warning'">⚠</span>
+
+        <span *ngIf="messageType=='danger'">✖</span>
+
+        <span>{{message}}</span>
+
+      </div>
+
+    </div>

@@ -250,10 +250,9 @@ export class AdminComponent implements OnInit {
 
         this.department.departmentName = "";
 
-        this.loadDashboard();
+        this.getAllDepartments();
 
       },
-
       error: () => {
 
         this.showPopup(
@@ -313,7 +312,7 @@ export class AdminComponent implements OnInit {
 
           this.editDepartmentId = 0;
 
-          this.loadDashboard();
+          this.getAllDepartments();
 
         },
 
@@ -334,19 +333,17 @@ export class AdminComponent implements OnInit {
 
   deleteDepartment(id: number) {
 
-    if (!confirm("Delete this Department ?")) {
-
-      return;
-
-    }
-
     this.adminService.deleteDepartment(id).subscribe({
 
       next: (res) => {
 
-        this.showPopup(res, "success");
+        this.departments = this.departments.filter(
+          x => x.departmentId !== id
+        );
 
-        this.loadDashboard();
+        this.departmentCount = this.departments.length;
+
+        this.showPopup(res, "success");
 
       },
 
@@ -504,7 +501,9 @@ export class AdminComponent implements OnInit {
 
         this.clearDoctor();
 
-        this.loadDashboard();
+        this.getAllDoctors();
+
+        this.getAllDepartments();
 
       },
 
@@ -521,9 +520,9 @@ export class AdminComponent implements OnInit {
 
   }
 
-  //-------------------------------------
+  
   // Edit Doctor
-  //-------------------------------------
+ 
 
   editDoctor(item: any) {
 
@@ -531,9 +530,9 @@ export class AdminComponent implements OnInit {
 
   }
 
-  //-------------------------------------
+ 
   // Update Doctor
-  //-------------------------------------
+ 
 
   updateDoctor(item: any) {
 
@@ -602,8 +601,12 @@ export class AdminComponent implements OnInit {
           );
 
           this.editDoctorId = 0;
+         
+          this.getAllDoctors();
 
-          this.loadDashboard();
+          this.getAllDepartments();
+
+
 
         },
 
@@ -620,28 +623,23 @@ export class AdminComponent implements OnInit {
 
   }
 
-  //-------------------------------------
+ 
   // Delete Doctor
-  //-------------------------------------
+  
 
   deleteDoctor(id: number) {
-
-    if (!confirm("Delete this Doctor?")) {
-
-      return;
-
-    }
 
     this.adminService.deleteDoctor(id).subscribe({
 
       next: (res) => {
 
-        this.showPopup(
-          res,
-          "success"
+        this.doctors = this.doctors.filter(
+          x => x.doctorId !== id
         );
 
-        this.loadDashboard();
+        this.doctorCount = this.doctorCount - 1;
+
+        this.showPopup(res, "success");
 
       },
 
@@ -658,9 +656,9 @@ export class AdminComponent implements OnInit {
 
   }
 
-  //-------------------------------------
+  
   // Clear Doctor Form
-  //-------------------------------------
+  
 
   clearDoctor() {
 
@@ -684,12 +682,6 @@ export class AdminComponent implements OnInit {
   //================ Logout =================//
 
   logout() {
-
-    if (!confirm("Are you sure you want to logout?")) {
-
-      return;
-
-    }
 
     this.router.navigate(['/']);
 
